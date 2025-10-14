@@ -3,9 +3,6 @@
 </div>
 
 <h1 align="center" style="margin-top: -50px;">✨ Agentic Reinforced Policy Optimization</h1>
-<h1 align="center" style="margin-top: -50px;">&</h1>
-<h1 align="center" style="margin-top: -50px;">✨ Agentic Entropy-Balanced Policy Optimization</h1>
-
 
 <div align="center"> 
 
