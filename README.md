@@ -46,7 +46,7 @@
 
 [2] [**Agentic Reinforced Policy Optimization**](https://arxiv.org/abs/2507.19849)
 
-[![github](https://img.shields.io/badge/-Github-black?logo=github)](https://github.com/RUC-NLPIR/ARPO) [![github](https://img.shields.io/github/stars/RUC-NLPIR/ARPO.svg?style=social)](https://github.com/RUC-NLPIR/ARPO) [🤗HF-paper](https://huggingface.co/papers/2507.19849)
+[![github](https://img.shields.io/badge/-Github-black?logo=github)](https://github.com/RUC-NLPIR/ARPO) [![github](https://img.shields.io/github/stars/RUC-NLPIR/ARPO.svg?style=social)](https://github.com/RUC-NLPIR/ARPO) [![arXiv](https://img.shields.io/badge/Arxiv-2310.01852-b31b1b.svg?logo=arXiv)](https://arxiv.org/abs/2507.19849) [![Paper](https://img.shields.io/badge/Paper-Hugging%20Face-yellow?logo=huggingface)](https://huggingface.co/papers/2505.16410)
 
 > [**Tool-Star: Empowering LLM-Brained Multi-Tool Reasoner via Reinforcement Learning**](https://arxiv.org/abs/2505.16410) <br>
 [![github](https://img.shields.io/badge/-Github-black?logo=github)](https://github.com/RUC-NLPIR/Tool-Star) [![github](https://img.shields.io/github/stars/RUC-NLPIR/Tool-Star.svg?style=social)](https://github.com/RUC-NLPIR/Tool-Star) [![arXiv](https://img.shields.io/badge/Arxiv-2310.01852-b31b1b.svg?logo=arXiv)](https://arxiv.org/abs/2505.16410)
