@@ -16,6 +16,7 @@
 </div>
 
 
+
 <!--
 <p align="center">
 🤗 <a href="https://huggingface.co/dongguanting/Qwen2.5-3B-ARPO" target="_blank">Qwen2.5-3B-ARPO</a> ｜
@@ -31,6 +32,9 @@
 </p>
 -->
 
+<h5 align="center"> If you like our project, please give us a star ⭐ on GitHub for the latest update.</h5>
+
+
 ## 🌟 Agentic RL Family
 
 👏 Welcome to try our agentic RL series of algorithms:
@@ -43,8 +47,6 @@
 
 
 
-
-<h5 align="center"> If you like our project, please give us a star ⭐ on GitHub for the latest update.</h5>
 
 ## 📣 Latest News
 
