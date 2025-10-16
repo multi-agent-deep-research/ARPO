@@ -26,6 +26,8 @@
 
 
 <p align="center">
+<img src="./assets/arxiv.png" width="14px" style="display:inline;"> <a href="https://arxiv.org/abs/2507.19849" target="_blank">Arxiv(ARPO)</a> ｜
+<img src="./assets/arxiv.png" width="14px" style="display:inline;"> <a href="" target="_blank">Arxiv(AEPO)</a> ｜
 🤗 <a href="https://huggingface.co/collections/dongguanting/arpo-688229ff8a6143fe5b4ad8ae" target="_blank">HuggingFace(ARPO)</a> ｜
 🤗 <a href="https://huggingface.co/collections/dongguanting/aepo-68ef6832c99697ee03d5e1c7" target="_blank">HuggingFace(AEPO)</a> ｜
 💬 <a href="https://mp.weixin.qq.com/s/mFNRs-bHCAAe3x4QZHF8aA">WeChat@机器之心</a>
