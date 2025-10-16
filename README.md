@@ -87,12 +87,10 @@
 </p></details>
 
 
-## 📦 Dataset
+## 📦 Model Zoo & Dataset
 
 - [🤗 3K Agentic SFT Data](https://huggingface.co/datasets/Gen-Verse/Open-AgentRL-SFT-3K)
 - [🤗 30K Agentic RL Data](https://huggingface.co/datasets/Gen-Verse/Open-AgentRL-30K)
-
-## 🤖 Model Zoo
 
 | **Model**         | **Download**                                                 |
 | ----------------- | ------------------------------------------------------------ |
