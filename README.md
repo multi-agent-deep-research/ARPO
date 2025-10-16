@@ -24,21 +24,20 @@
 </p>
 -->
 
-<p align="center">
+
 <p align="center">
 🤗 <a href="https://huggingface.co/collections/dongguanting/arpo-688229ff8a6143fe5b4ad8ae" target="_blank">HuggingFace(ARPO)</a> ｜
 🤗 <a href="https://huggingface.co/collections/dongguanting/aepo-68ef6832c99697ee03d5e1c7" target="_blank">HuggingFace(AEPO)</a> ｜
 💬 <a href="https://mp.weixin.qq.com/s/mFNRs-bHCAAe3x4QZHF8aA">WeChat@机器之心</a>
 <p align="center">
 
-
-[X](https://x.com/kakakbibibi/status/1950211490943832393), 
-[WeChat](https://mp.weixin.qq.com/s/mFNRs-bHCAAe3x4QZHF8aA), 
-[Zhihu](https://zhuanlan.zhihu.com/p/1938022709545141501), 
-[YouTube](https://www.youtube.com/watch?v=FOK2tRtq7TE)
-[Xiaohongshu](https://www.xiaohongshu.com/explore/68885b6b000000002501bb5e?xsec_token=ABhbOv-GAqL62zxhidTntouED470HN18Wk3e980-_uwtI=&xsec_source=pc_user)**.
-[![zhihu](https://img.shields.io/badge/-小红书-000000?logo=zhihu&logoColor=0084FF)](https://zhuanlan.zhihu.com/p/668166885)
-
+<p align="center">
+[X](https://x.com/kakakbibibi/status/1950211490943832393) ｜ 
+[WeChat](https://mp.weixin.qq.com/s/mFNRs-bHCAAe3x4QZHF8aA) ｜
+[Zhihu](https://zhuanlan.zhihu.com/p/1938022709545141501) ｜ 
+[YouTube](https://www.youtube.com/watch?v=FOK2tRtq7TE) ｜
+[Xiaohongshu](https://www.xiaohongshu.com/explore/68885b6b000000002501bb5e?xsec_token=ABhbOv-GAqL62zxhidTntouED470HN18Wk3e980-_uwtI=&xsec_source=pc_user)
+<p align="center">
 
 > [!NOTE]
 > This project includes the codebase, datasets and chckpoints for two RL algorithms: **Agentic Reinforced Policy Optimization (ARPO)** and **Agentic Entropy-Balanced Policy Optimization (AEPO)**. We will continue to iterate and expand our Agentic RL series.
