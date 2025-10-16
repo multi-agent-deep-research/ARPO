@@ -30,7 +30,7 @@
 🤗 <a href="https://huggingface.co/collections/dongguanting/arpo-688229ff8a6143fe5b4ad8ae" target="_blank">Paper(ARPO)</a> ｜
 🤗 <a href="https://huggingface.co/collections/dongguanting/arpo-688229ff8a6143fe5b4ad8ae" target="_blank">Paper(AEPO)</a> ｜
 🤗 <a href="https://huggingface.co/collections/dongguanting/arpo-688229ff8a6143fe5b4ad8ae" target="_blank">Models(ARPO)</a> ｜
-🤗 <a href="https://huggingface.co/collections/dongguanting/aepo-68ef6832c99697ee03d5e1c7" target="_blank">Models(AEPO)</a> ｜
+🤗 <a href="https://huggingface.co/collections/dongguanting/aepo-68ef6832c99697ee03d5e1c7" target="_blank">Models(AEPO)</a>
 <p align="center">
 <p align="center">
 <img src="./assets/x.png" width="14px" style="display:inline;"> <a href="https://x.com/kakakbibibi/status/1950211490943832393" target="_blank">X@AK</a> ｜
