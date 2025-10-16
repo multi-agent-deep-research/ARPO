@@ -27,8 +27,8 @@
 <p align="center">
 <img src="./assets/arxiv.png" width="14px" style="display:inline;"> <a href="https://arxiv.org/abs/2507.19849" target="_blank">Arxiv(ARPO)</a> ｜
 <img src="./assets/arxiv.png" width="14px" style="display:inline;"> <a href="" target="_blank">Arxiv(AEPO)</a> ｜
-🤗 <a href="https://huggingface.co/collections/dongguanting/arpo-688229ff8a6143fe5b4ad8ae" target="_blank">Paper(ARPO)</a> ｜
-🤗 <a href="https://huggingface.co/collections/dongguanting/arpo-688229ff8a6143fe5b4ad8ae" target="_blank">Paper(AEPO)</a> ｜
+🤗 <a href="https://huggingface.co/papers/2507.19849" target="_blank">Paper(ARPO)</a> ｜
+🤗 <a href="" target="_blank">Paper(AEPO)</a> ｜
 🤗 <a href="https://huggingface.co/collections/dongguanting/arpo-688229ff8a6143fe5b4ad8ae" target="_blank">Models(ARPO)</a> ｜
 🤗 <a href="https://huggingface.co/collections/dongguanting/aepo-68ef6832c99697ee03d5e1c7" target="_blank">Models(AEPO)</a>
 <p align="center">
@@ -51,13 +51,13 @@
 
 ## 📣 Latest News
 
-- **[Oct 14, 2025]**: 🚀🚀🚀 We propose a new algorithm **AEPO**, which focused on entropy-balanced agentic RL and consistently outperforms ARPO on datasets like GAIA, HLE, and AIME. Full [codebase](https://github.com/RUC-NLPIR/ARPO/tree/main/AEPO) and [model checkpoints](https://huggingface.co/collections/dongguanting/aepo-68ef6832c99697ee03d5e1c7) of AEPO released.
+- **[Oct 14, 2025]**: 🚀🚀🚀 We propose a new algorithm **AEPO**, which focused on entropy-balanced agentic RL and consistently outperforms ARPO on datasets like GAIA, HLE, and AIME. Full [codebase](https://github.com/RUC-NLPIR/ARPO/tree/main/AEPO) and [🤗 HF-Models](https://huggingface.co/collections/dongguanting/aepo-68ef6832c99697ee03d5e1c7) of AEPO released.
 - **[Aug 11, 2025]**: The brief introduction of ARPO can be found on a series of platforms like **[X](https://x.com/kakakbibibi/status/1950211490943832393), [WeChat](https://mp.weixin.qq.com/s/mFNRs-bHCAAe3x4QZHF8aA), [Zhihu](https://zhuanlan.zhihu.com/p/1938022709545141501), [YouTube](https://www.youtube.com/watch?v=FOK2tRtq7TE) and [Xiaohongshu](https://www.xiaohongshu.com/explore/68885b6b000000002501bb5e?xsec_token=ABhbOv-GAqL62zxhidTntouED470HN18Wk3e980-_uwtI=&xsec_source=pc_user)**.
 - **[July 29, 2025]**: 🔥 We are honored to be featured as 🤗 HuggingFace **[Daily Paper #1](https://huggingface.co/papers/2507.19849)** and  **[Weekly Paper #1](https://huggingface.co/papers/week/2025-W31)**.
 - **[July 29, 2025]**: 📄 Our paper is now available on **[arXiv](https://arxiv.org/abs/2507.19849)** and **[Hugging Face](https://huggingface.co/papers/2507.19849)** daily paper.
 - **[July 25, 2025]**: 🔥 We released all our **ARPO model checkpoints (3B~14B)** and **datasets(SFT, RL, Evaluation)**. Checkout **[🤗ARPO Collection](https://huggingface.co/collections/dongguanting/arpo-688229ff8a6143fe5b4ad8ae)** here. We will keep update it!
 - **[July 25, 2025]**: We have implemented extensive tool-call acceleration and memory optimization during RL training in ARPO.（**Training Qwen3-14B in 1 node with a batch size of 128 takes only 10 minutes per step!!! we also maintain a dynamic cache mechanism to save your tool call results in real-time!!**）
-- **[July 25, 2025]**: 🚀 Full codebase of **ARPO** released. ARPO supports multi-tool agentic RL training for the Qwen2.5, 3 and Llama3 models. 
+- **[July 25, 2025]**: 🚀🚀🚀 Full codebase of **ARPO** released. ARPO supports multi-tool agentic RL training for the Qwen2.5, 3 and Llama3 models in [🤗 HF-Models](https://huggingface.co/collections/dongguanting/arpo-688229ff8a6143fe5b4ad8ae) . 
 
 
 
@@ -88,11 +88,6 @@
 
 
 ## 📦 Model Zoo & Dataset
-
-
-- [🤗 54K Agentic SFT Data](https://huggingface.co/datasets/dongguanting/ARPO-SFT-54K)
-- [🤗 10K Agentic Deep Search RL Data](https://huggingface.co/datasets/dongguanting/ARPO-RL-DeepSearch-1K)
-- [🤗 10K Agentic Reasoning RL Data](https://huggingface.co/datasets/dongguanting/ARPO-RL-Reasoning-10K)
 
 | **Dataset**         | **Download**                                                 |
 | ----------------- | ------------------------------------------------------------ |
