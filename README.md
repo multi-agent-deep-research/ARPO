@@ -33,7 +33,7 @@
 
 <p align="center">
 
-🤗 <a href="https://x.com/kakakbibibi/status/1950211490943832393" target="_blank">X@AK</a> ｜
+<img src="./assets/x.png" width="14px" style="display:inline;"> <a href="https://x.com/kakakbibibi/status/1950211490943832393" target="_blank">X@AK</a> ｜
 [X](https://x.com/kakakbibibi/status/1950211490943832393) ｜ 
 [WeChat](https://mp.weixin.qq.com/s/mFNRs-bHCAAe3x4QZHF8aA) ｜
 [Zhihu](https://zhuanlan.zhihu.com/p/1938022709545141501) ｜ 
