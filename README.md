@@ -37,7 +37,7 @@
 [Zhihu](https://zhuanlan.zhihu.com/p/1938022709545141501), 
 [YouTube](https://www.youtube.com/watch?v=FOK2tRtq7TE)
 [Xiaohongshu](https://www.xiaohongshu.com/explore/68885b6b000000002501bb5e?xsec_token=ABhbOv-GAqL62zxhidTntouED470HN18Wk3e980-_uwtI=&xsec_source=pc_user)**.
-
+[![zhihu](https://img.shields.io/badge/-小红书-000000?logo=zhihu&logoColor=0084FF)](https://zhuanlan.zhihu.com/p/668166885)
 
 
 > [!NOTE]
