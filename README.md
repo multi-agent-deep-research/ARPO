@@ -36,7 +36,7 @@
 <img src="./assets/x.png" width="14px" style="display:inline;"> <a href="https://x.com/jiqizhixin/status/1950440523107619136" target="_blank">X@机器之心</a> ｜
 <img src="./assets/weixin.png" width="14px" style="display:inline;"> <a href="https://mp.weixin.qq.com/s/mFNRs-bHCAAe3x4QZHF8aA" target="_blank">WeChat@机器之心</a> ｜
 <img src="./assets/zhihu.png" width="14px" style="display:inline;"> <a href="https://zhuanlan.zhihu.com/p/1938022709545141501" target="_blank">Zhihu</a> ｜
-<img src="./assets/youtube.png" width="14px" style="display:inline;"> <a href="https://www.youtube.com/watch?v=FOK2tRtq7TE" target="_blank">YouTube</a> ｜
+<img src="./assets/YouTube.png" width="14px" style="display:inline;"> <a href="https://www.youtube.com/watch?v=FOK2tRtq7TE" target="_blank">YouTube</a> ｜
 <img src="./assets/xiaohongshu.png" width="14px" style="display:inline;"> <a href="https://www.youtube.com/watch?v=FOK2tRtq7TE" target="_blank">Xiaohongshu</a> ｜
 <p align="center">
 
