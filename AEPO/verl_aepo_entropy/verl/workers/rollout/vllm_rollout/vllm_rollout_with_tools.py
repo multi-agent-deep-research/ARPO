@@ -636,7 +636,7 @@ class vLLMRolloutWithTools(vLLMRollout):
                 # Dynamically calculate initial_rollouts for each sample
                 initial_rollouts_list = self._calculate_initial_rollouts_dynamical(prompts, **kwargs)
             else:
-                initial_rollouts_list = [self.initial_rollouts] * len(prompt_token_ids_list)
+                initial_rollouts_list = [max(1, min(self.initial_rollouts, num_samples))] * len(prompt_token_ids_list)
             logger.info(f"Final calculated initial_rollouts: {initial_rollouts_list}")
 
             # State for each sample in the batch
