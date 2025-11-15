@@ -273,7 +273,7 @@ conda create -n arpo python==3.10
 conda activate arpo
 
 # install torch & flash-atten
-pip3 install torch==2.4.0 --index-url https://download.pytorch.org/whl/cu124
+pip3 install torch==2.6.0 --index-url https://download.pytorch.org/whl/cu124
 pip3 install flash-attn --no-build-isolation
 
 # install RL basic env
