@@ -54,7 +54,7 @@
 
 
 ## 📣 Latest News
-
+- **[Aug 11, 2025]**: The brief introduction of AEPO can be found on a series of platforms like **[X](https://x.com/_akhaliq/status/1979203620244447248), [WeChat](https://mp.weixin.qq.com/s/mL3CTNonZVoLWnQVfK7KAw)**.
 - **[Oct 17, 2025]**: 📄 Our paper is now available on **[arXiv](https://arxiv.org/abs/2510.14545)** and **[Hugging Face](https://huggingface.co/papers/2510.14545)** daily paper.
 - **[Oct 16, 2025]**: 🚀🚀🚀 We propose a new algorithm **AEPO**, which focused on entropy-balanced agentic RL and consistently outperforms ARPO on datasets like GAIA, HLE, and AIME. Full [codebase](https://github.com/RUC-NLPIR/ARPO/tree/main/AEPO) and [🤗 HF-Models](https://huggingface.co/collections/dongguanting/aepo-68ef6832c99697ee03d5e1c7) of AEPO released.
 - **[Aug 11, 2025]**: The brief introduction of ARPO can be found on a series of platforms like **[X](https://x.com/kakakbibibi/status/1950211490943832393), [WeChat](https://mp.weixin.qq.com/s/mFNRs-bHCAAe3x4QZHF8aA), [Zhihu](https://zhuanlan.zhihu.com/p/1938022709545141501), [YouTube](https://www.youtube.com/watch?v=FOK2tRtq7TE) and [Xiaohongshu](https://www.xiaohongshu.com/explore/68885b6b000000002501bb5e?xsec_token=ABhbOv-GAqL62zxhidTntouIOJqDraaIMAUINlNUWmEtU=&xsec_source=pc_user)**.
