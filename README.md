@@ -110,6 +110,7 @@
 | ----------------- | ------------------------------------------------------------ |
 | Qwen3-8B-ARPO-DeepSearch | [🤗 HuggingFace](https://huggingface.co/dongguanting/Qwen3-8B-ARPO-DeepSearch) |
 | Qwen3-14B-ARPO-DeepSearch | [🤗 HuggingFace](https://huggingface.co/dongguanting/Qwen3-14B-ARPO-DeepSearch) |
+| QwQ-32B-ARPO-DeepSearch | [🤗 HuggingFace](https://huggingface.co/dongguanting/QwQ-32B-ARPO-DeepSearch) |
 | Qwen2.5-3B-ARPO | [🤗 HuggingFace](https://huggingface.co/dongguanting/Qwen2.5-3B-ARPO) |
 | Qwen2.5-7B-ARPO | [🤗 HuggingFace](https://huggingface.co/dongguanting/Qwen2.5-7B-ARPO) |
 | Llama3.1-8B-ARPO | [🤗 HuggingFace](https://huggingface.co/dongguanting/Llama3.1-8B-ARPO) |
@@ -120,7 +121,7 @@
 | Qwen3-8B-AEPO-DeepSearch | [🤗 HuggingFace](https://huggingface.co/dongguanting/Qwen3-8B-AEPO-DeepSearch) |
 | Qwen3-14B-AEPO-DeepSearch | [🤗 HuggingFace](https://huggingface.co/dongguanting/Qwen3-14B-AEPO-DeepSearch) |
 | Qwen2.5-7B-AEPO | [🤗 HuggingFace](https://huggingface.co/dongguanting/Qwen2.5-7B-AEPO) |
-
+| QwQ-32B-AEPO-DeepSearch | [🤗 HuggingFace](https://huggingface.co/dongguanting/QwQ-32B-AEPO-DeepSearch) |
 
 
 ## Table of Contents
