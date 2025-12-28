@@ -120,8 +120,8 @@
 | ----------------- | ------------------------------------------------------------ |
 | Qwen3-8B-AEPO-DeepSearch | [🤗 HuggingFace](https://huggingface.co/dongguanting/Qwen3-8B-AEPO-DeepSearch) |
 | Qwen3-14B-AEPO-DeepSearch | [🤗 HuggingFace](https://huggingface.co/dongguanting/Qwen3-14B-AEPO-DeepSearch) |
-| Qwen2.5-7B-AEPO | [🤗 HuggingFace](https://huggingface.co/dongguanting/Qwen2.5-7B-AEPO) |
 | QwQ-32B-AEPO-DeepSearch | [🤗 HuggingFace](https://huggingface.co/dongguanting/QwQ-32B-AEPO-DeepSearch) |
+| Qwen2.5-7B-AEPO | [🤗 HuggingFace](https://huggingface.co/dongguanting/Qwen2.5-7B-AEPO) |
 
 
 ## Table of Contents
