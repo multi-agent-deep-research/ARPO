@@ -54,13 +54,16 @@
 
 
 ## 📣 Latest News
+
+ **[Jan 26, 2026]**: 🎉 Our paper **[Agentic Reinforced Policy Optimization (ARPO)](https://arxiv.org/abs/2507.19849)** has been accepted at ICLR 2026!
+- **[Jan 20, 2026]**: 🎉 Our paper **[Agentic Entropy-Balanced Policy Optimization (AEPO)](https://arxiv.org/abs/2510.14545)** has been accepted at WWW 2026!
 - **[Dec 20, 2025]**: 🚀🚀🚀 We released **[AEPO-32B](https://huggingface.co/dongguanting/QwQ-32B-AEPO-DeepSearch)** and **[ARPO-32B](https://huggingface.co/dongguanting/QwQ-32B-ARPO-DeepSearch)** (based on **QwQ-32B**), achieving **53.4/12.8** and **51.5/11.2** on **GAIA/HLE**.
 - **[Nov 03, 2025]**: The brief introduction of AEPO can be found on a series of platforms like **[X](https://x.com/_akhaliq/status/1979203620244447248), [WeChat](https://mp.weixin.qq.com/s/mL3CTNonZVoLWnQVfK7KAw)**.
-- **[Oct 17, 2025]**: 📄 Our paper is now available on **[arXiv](https://arxiv.org/abs/2510.14545)** and **[Hugging Face](https://huggingface.co/papers/2510.14545)** daily paper.
+- **[Oct 17, 2025]**: 📄 Our AEPO paper is now available on **[arXiv](https://arxiv.org/abs/2510.14545)** and **[Hugging Face](https://huggingface.co/papers/2510.14545)** daily paper.
 - **[Oct 16, 2025]**: 🚀🚀🚀 We propose a new algorithm **AEPO**, which focused on entropy-balanced agentic RL and consistently outperforms ARPO on datasets like GAIA, HLE, and AIME. Full [codebase](https://github.com/RUC-NLPIR/ARPO/tree/main/AEPO) and [🤗 HF-Models](https://huggingface.co/collections/dongguanting/aepo-68ef6832c99697ee03d5e1c7) of AEPO released.
 - **[Aug 11, 2025]**: The brief introduction of ARPO can be found on a series of platforms like **[X](https://x.com/kakakbibibi/status/1950211490943832393), [WeChat](https://mp.weixin.qq.com/s/mFNRs-bHCAAe3x4QZHF8aA), [Zhihu](https://zhuanlan.zhihu.com/p/1938022709545141501), [YouTube](https://www.youtube.com/watch?v=FOK2tRtq7TE) and [Xiaohongshu](https://www.xiaohongshu.com/explore/68885b6b000000002501bb5e?xsec_token=ABhbOv-GAqL62zxhidTntouIOJqDraaIMAUINlNUWmEtU=&xsec_source=pc_user)**.
 - **[July 29, 2025]**: 🔥 We are honored to be featured as 🤗 HuggingFace **[Daily Paper #1](https://huggingface.co/papers/2507.19849)** and  **[Weekly Paper #1](https://huggingface.co/papers/week/2025-W31)**.
-- **[July 29, 2025]**: 📄 Our paper is now available on **[arXiv](https://arxiv.org/abs/2507.19849)** and **[Hugging Face](https://huggingface.co/papers/2507.19849)** daily paper.
+- **[July 29, 2025]**: 📄 Our ARPO paper is now available on **[arXiv](https://arxiv.org/abs/2507.19849)** and **[Hugging Face](https://huggingface.co/papers/2507.19849)** daily paper.
 - **[July 25, 2025]**: 🔥 We released all our **ARPO model checkpoints (3B~14B)** and **datasets(SFT, RL, Evaluation)**. Checkout **[🤗ARPO Collection](https://huggingface.co/collections/dongguanting/arpo-688229ff8a6143fe5b4ad8ae)** here. We will keep update it!
 - **[July 25, 2025]**: We have implemented extensive tool-call acceleration and memory optimization during RL training in ARPO.（**Training Qwen3-14B in 1 node with a batch size of 128 takes only 10 minutes per step!!! we also maintain a dynamic cache mechanism to save your tool call results in real-time!!**）
 - **[July 25, 2025]**: 🚀🚀🚀 Full codebase of **ARPO** released. ARPO supports multi-tool agentic RL training for the Qwen2.5, 3 and Llama3 models in [🤗 HF-Models](https://huggingface.co/collections/dongguanting/arpo-688229ff8a6143fe5b4ad8ae) . 
