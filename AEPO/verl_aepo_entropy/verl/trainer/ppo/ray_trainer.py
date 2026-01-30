@@ -91,6 +91,7 @@ class AdvantageEstimator(str, Enum):
     RLOO = "rloo"
     OPO = "opo"
     GRPO_PASSK = "grpo_passk"
+    ARPO_HYBRID = "arpo_hybrid"
 
 
 @dataclass
@@ -318,6 +319,66 @@ def compute_advantage(data: DataProto, adv_estimator, gamma=1.0, lam=1.0, num_re
         )
         data.batch["advantages"] = advantages
         data.batch["returns"] = returns
+    elif adv_estimator == AdvantageEstimator.ARPO_HYBRID:
+        # ARPO-style shared-prefix vs branch-specific credit assignment with optional entropy shaping.
+        response_mask = data.batch["response_mask"]
+        token_level_rewards = data.batch["token_level_rewards"]
+        responses = data.batch["responses"]
+        uid = data.non_tensor_batch["uid"]
+
+        # Scalar rewards per trajectory (masked sum), then z-score within each prompt group.
+        scores = (token_level_rewards * response_mask).sum(dim=-1)
+        adv_scalar = torch.zeros_like(scores)
+        eps = torch.tensor(1e-6, device=scores.device)
+        for group_id in np.unique(uid):
+            group_indices = np.where(uid == group_id)[0]
+            group_scores = scores[group_indices]
+            gstd = torch.clamp(group_scores.std(), min=eps)
+            adv_scalar[group_indices] = (group_scores - group_scores.mean()) / gstd
+
+        advantages = torch.zeros_like(token_level_rewards)
+        returns = torch.zeros_like(token_level_rewards)
+
+        for group_id in np.unique(uid):
+            group_indices = np.where(uid == group_id)[0]
+            group_responses = responses[group_indices]
+            group_mask = response_mask[group_indices]
+            group_adv_scalar = adv_scalar[group_indices]
+            group_mean_adv = group_adv_scalar.mean()
+
+            # Shared prefix tokens: all valid and identical across the group.
+            all_valid = group_mask.bool().all(dim=0)
+            tokens_equal = (group_responses == group_responses[0]).all(dim=0)
+            shared_positions = all_valid & tokens_equal
+
+            indiv_adv = group_adv_scalar.unsqueeze(1).expand_as(group_mask)
+            shared_adv = torch.full_like(indiv_adv, group_mean_adv)
+            token_adv_group = torch.where(
+                shared_positions.unsqueeze(0), shared_adv, indiv_adv
+            )
+            token_adv_group = token_adv_group * group_mask
+
+            advantages[group_indices] = token_adv_group
+            returns[group_indices] = token_adv_group
+
+        # Optional entropy-aware shaping.
+        lambda_entropy = kwargs.get("lambda_entropy", 0.0)
+        entropy_clip = kwargs.get("entropy_clip", 0.5)
+        entropy = data.batch.get("entropy", None)
+        if lambda_entropy != 0 and entropy is not None:
+            valid_entropy = entropy[response_mask.bool()]
+            if valid_entropy.numel() > 0:
+                entropy_mean = valid_entropy.mean()
+                entropy_delta = torch.clamp(
+                    lambda_entropy * (entropy - entropy_mean),
+                    min=-entropy_clip,
+                    max=entropy_clip,
+                )
+                advantages = advantages + entropy_delta * response_mask
+                returns = returns + entropy_delta * response_mask
+
+        data.batch["advantages"] = advantages
+        data.batch["returns"] = returns
     else:
         raise NotImplementedError
     return data
@@ -407,6 +468,7 @@ class RayPPOTrainer:
             AdvantageEstimator.RLOO,
             AdvantageEstimator.OPO,
             AdvantageEstimator.REINFORCE_PLUS_PLUS_BASELINE,
+            AdvantageEstimator.ARPO_HYBRID,
         ]:
             self.use_critic = False
         else:
@@ -1140,6 +1202,8 @@ class RayPPOTrainer:
                             use_pf_ppo=self.config.algorithm.use_pf_ppo,
                             pf_ppo_reweight_method=self.config.algorithm.pf_ppo.reweight_method,
                             pf_ppo_weight_pow=self.config.algorithm.pf_ppo.weight_pow,
+                            lambda_entropy=self.config.algorithm.get("lambda_entropy", 0.0),
+                            entropy_clip=self.config.algorithm.get("entropy_clip", 0.5),
                         )
 
                     # update critic
@@ -1168,7 +1232,7 @@ class RayPPOTrainer:
                                         # Print first few items if possible
                                         if len(batch.batch[key]) > 0:
                                             print(f"First item type:", type(batch.batch[key][0]))
-                            
+
                             # Debug non_tensor_batch information
                             print("\nNon-tensor batch keys:", batch.non_tensor_batch.keys())
                             for key in batch.non_tensor_batch.keys():
@@ -1178,11 +1242,11 @@ class RayPPOTrainer:
                                         print(f"Non-tensor batch[{key}] content type:", type(batch.non_tensor_batch[key]))
                                         if len(batch.non_tensor_batch[key]) > 0:
                                             print(f"First item type:", type(batch.non_tensor_batch[key][0]))
-                            
+
                             # Debug meta_info
                             print("\nMeta info keys:", batch.meta_info.keys())
                             print("Batch size in meta_info if exists:", batch.meta_info.get("batch_size", "Not found"))
-                            
+
                             actor_output = self.actor_rollout_wg.update_actor(batch)
                         actor_output_metrics = reduce_metrics(actor_output.meta_info["metrics"])
                         metrics.update(actor_output_metrics)
