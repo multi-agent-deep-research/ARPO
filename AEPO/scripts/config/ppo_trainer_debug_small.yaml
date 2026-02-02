@@ -7,8 +7,8 @@ data:
     - ../ARPO/rl_datasets/hle_test.parquet
   prompt_key: prompt
   reward_fn_key: data_source
-  max_prompt_length: 512
-  max_response_length: 512
+  max_prompt_length: 1024
+  max_response_length: 2048
   train_batch_size: 1          # minimal batch for debugging
   val_batch_size: 1
   return_raw_input_ids: False
@@ -67,7 +67,7 @@ actor_rollout_ref:
     checkpoint:
       contents: ['model', 'optimizer', 'extra']
     optim:
-      lr: 1e-6
+      lr: 1e-9
       lr_warmup_steps: -1
       lr_warmup_steps_ratio: 0.
       min_lr_ratio: 0.0
@@ -107,7 +107,7 @@ actor_rollout_ref:
     prompt_length: ${data.max_prompt_length}
     response_length: ${data.max_response_length}
     dtype: bfloat16
-    gpu_memory_utilization: 0.4    # be conservative on memory
+    gpu_memory_utilization: 0.6    # be conservative on memory
     ignore_eos: False
     enforce_eager: True
     free_cache_engine: True
@@ -124,8 +124,8 @@ actor_rollout_ref:
     disable_log_stats: True
     enable_chunked_prefill: True
     do_sample: True
-    n: 1
-    initial_rollouts: 1
+    n: 4
+    initial_rollouts: 4
     beam_size: 1.
     branch_probability: 0.5
     entropy_weight: 0.5
@@ -175,7 +175,7 @@ critic:
   rollout_n: ${actor_rollout_ref.rollout.n}
   strategy: fsdp
   optim:
-    lr: 1e-5
+    lr: 1e-9
     lr_warmup_steps_ratio: 0.
     min_lr_ratio: null
     warmup_style: constant
@@ -275,9 +275,9 @@ trainer:
   balance_batch: True
   total_epochs: 2            # short run for debugging
   total_training_steps: null
-  project_name: debug
-  experiment_name: arpo_hybrid_small
-  logger: [ 'console' ]      # keep logging minimal
+  project_name: aepo_repro
+  experiment_name: arpo_hybrid_small_debug
+  logger: [ 'console', 'wandb' ]      # keep logging minimal
   log_val_generations: 0
   rollout_data_dir: null
   validation_data_dir: null

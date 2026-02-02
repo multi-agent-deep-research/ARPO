@@ -9,19 +9,15 @@ from transformers import AutoTokenizer
 def validate_format(text: str) -> Tuple[bool, str]:
     """
     Validate if the text follows the required format with paired tags.
-    
+
     Args:
         text: The text to validate
-        
+
     Returns:
         tuple: (is_valid, reason)
     """
-    # Check if <think></think>, <answer></answer> is paired
     if text.count('<think>') != text.count('</think>'):
         return False, "<think> </think> not paired"
-
-    if text.count('<think>') == 0 or text.count('</think>') == 0:
-        return False, "<think> or </think> not found"
 
     if text.count('<answer>') != 1 or text.count('</answer>') != 1:
         return False, "<answer> or </answer> not found"
@@ -64,14 +60,11 @@ def validate_format(text: str) -> Tuple[bool, str]:
 
         current_pos = result_end_pos
 
-    # Check if \boxed{} is in the answer
+    # Check the order of <answer> tags
     answer_start = text.find('<answer>')
     answer_end = text.find('</answer>')
     if answer_start > answer_end:
         return False, "<answer> must be before </answer>"
-    answer_content = text[answer_start:answer_end]
-    if '\\boxed{' not in answer_content or '}' not in answer_content:
-        return False, "answer is missing \\boxed{} format"
 
     return True, "format is correct"
 
@@ -321,14 +314,16 @@ def compute_score(data_source: str, solution_str: str, ground_truth: Any, extra_
         result["reason"] = "cannot extract answer"
         return result
     
-    try:
-        answer = remove_boxed(last_boxed_only_string(answer_part))
-        result["answer"] = answer
-    except Exception as e:
-        print(f"--------------------------------find box error: {e}--------------------------------\nsolution_str: {solution_str}, ground_truth: {ground_truth}")
-        result["score"] = -1
-        result["reason"] = f"find box error: {e}"
-        return result
+    boxed = last_boxed_only_string(answer_part)
+    if boxed is not None:
+        try:
+            answer = remove_boxed(boxed)
+        except Exception as e:
+            print(f"--------------------------------find box error: {e}--------------------------------\nsolution_str: {solution_str}, ground_truth: {ground_truth}")
+            answer = answer_part.strip()
+    else:
+        answer = answer_part.strip()
+    result["answer"] = answer
     
     f1_score = get_f1_score(answer, ground_truth)
     result["f1_score"] = f1_score

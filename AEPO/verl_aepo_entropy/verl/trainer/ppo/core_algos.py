@@ -615,7 +615,11 @@ def compute_policy_loss_entropy_balanced_clipping(
             the estimated KL divergence between the latest updating policy and the old sampling policy
         pg_clipfrac_lower: (float)
             the fraction of policy gradient loss being clipped when the advantage is negative
+        debug_metrics: (dict)
+            debug metrics for tracking NaN/Inf issues
     """
+
+    debug_metrics = {}
 
     # 对entropy矩阵进行标准化：(entropy - mean) / std
     if enable_entropy_balanced_advantage and entropy is not None:
@@ -627,6 +631,11 @@ def compute_policy_loss_entropy_balanced_clipping(
             entropy_mean = valid_entropy_flat.mean()
             entropy_std = valid_entropy_flat.std()
 
+            debug_metrics.update({
+                "debug/entropy_mean": entropy_mean.item(),
+                "debug/entropy_std": entropy_std.item(),
+            })
+
             # 避免除零，如果标准差为0则设为1
             if entropy_std == 0:
                 entropy_std = 1.0
@@ -634,8 +643,22 @@ def compute_policy_loss_entropy_balanced_clipping(
             # 标准化entropy
             entropy_normalized = (entropy - entropy_mean) / entropy_std
 
+            debug_metrics.update({
+                "debug/entropy_normalized_min": entropy_normalized.min().item(),
+                "debug/entropy_normalized_max": entropy_normalized.max().item(),
+                "debug/entropy_normalized_has_nan": float(torch.isnan(entropy_normalized).any()),
+                "debug/entropy_normalized_has_inf": float(torch.isinf(entropy_normalized).any()),
+            })
+
             # 使用标准化后的entropy来调整advantages（detach版本，不参与梯度计算）
             advantages = advantages * (1 + 0.2 * entropy_normalized.detach())
+
+            debug_metrics.update({
+                "debug/advantages_after_entropy_min": advantages.min().item(),
+                "debug/advantages_after_entropy_max": advantages.max().item(),
+                "debug/advantages_after_entropy_has_nan": float(torch.isnan(advantages).any()),
+                "debug/advantages_after_entropy_has_inf": float(torch.isinf(advantages).any()),
+            })
 
     assert clip_ratio_c > 1.0, (
         "The lower bound of the clip_ratio_c for dual-clip PPO should be greater than 1.0,"
@@ -646,6 +669,17 @@ def compute_policy_loss_entropy_balanced_clipping(
     ratio = torch.exp(negative_approx_kl)
     ppo_kl = verl_F.masked_mean(-negative_approx_kl, response_mask)
 
+    debug_metrics.update({
+        "debug/negative_approx_kl_min": negative_approx_kl.min().item(),
+        "debug/negative_approx_kl_max": negative_approx_kl.max().item(),
+        "debug/negative_approx_kl_has_nan": float(torch.isnan(negative_approx_kl).any()),
+        "debug/negative_approx_kl_has_inf": float(torch.isinf(negative_approx_kl).any()),
+        "debug/ratio_in_loss_min": ratio.min().item(),
+        "debug/ratio_in_loss_max": ratio.max().item(),
+        "debug/ratio_in_loss_has_nan": float(torch.isnan(ratio).any()),
+        "debug/ratio_in_loss_has_inf": float(torch.isinf(ratio).any()),
+    })
+
     pg_losses1 = -advantages * ratio
     if cliprange_low is None:
         cliprange_low = cliprange
@@ -655,6 +689,18 @@ def compute_policy_loss_entropy_balanced_clipping(
     if enable_entropy_balanced_clipping:
         min_bound = torch.full_like(ratio, 1 - cliprange_low)
         max_bound = (1 + cliprange_high) / ratio.detach() * ratio
+
+        ratio_detach = ratio.detach()
+        debug_metrics.update({
+            "debug/min_bound": (1 - cliprange_low),
+            "debug/max_bound_min": max_bound.min().item(),
+            "debug/max_bound_max": max_bound.max().item(),
+            "debug/max_bound_has_nan": float(torch.isnan(max_bound).any()),
+            "debug/max_bound_has_inf": float(torch.isinf(max_bound).any()),
+            "debug/ratio_detach_close_to_zero_count": (ratio_detach.abs() < 1e-10).sum().item(),
+            "debug/ratio_detach_min": ratio_detach.min().item(),
+        })
+
         pg_losses2 = -advantages * torch.clamp(ratio, min_bound, max_bound)
     else:
         pg_losses2 = -advantages * torch.clamp(
@@ -676,7 +722,14 @@ def compute_policy_loss_entropy_balanced_clipping(
         loss_mat=pg_losses, loss_mask=response_mask, loss_agg_mode=loss_agg_mode
     )
 
-    return pg_loss, pg_clipfrac, ppo_kl, pg_clipfrac_lower
+    debug_metrics.update({
+        "debug/pg_losses_min": pg_losses.min().item(),
+        "debug/pg_losses_max": pg_losses.max().item(),
+        "debug/pg_losses_has_nan": float(torch.isnan(pg_losses).any()),
+        "debug/pg_losses_has_inf": float(torch.isinf(pg_losses).any()),
+    })
+
+    return pg_loss, pg_clipfrac, ppo_kl, pg_clipfrac_lower, debug_metrics
 
 
 def compute_value_loss(
