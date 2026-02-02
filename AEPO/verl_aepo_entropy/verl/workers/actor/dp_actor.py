@@ -538,10 +538,48 @@ class DataParallelPPOActor(BasePPOActor):
                         calculate_entropy=calculate_entropy,
                     )
 
+                    log_prob_diff = log_prob - old_log_prob
+                    ratio = torch.exp(log_prob_diff)
+
+                    debug_metrics = {
+                        "debug/log_prob_min": log_prob.min().item(),
+                        "debug/log_prob_max": log_prob.max().item(),
+                        "debug/log_prob_has_nan": float(torch.isnan(log_prob).any()),
+                        "debug/log_prob_has_inf": float(torch.isinf(log_prob).any()),
+                        "debug/old_log_prob_min": old_log_prob.min().item(),
+                        "debug/old_log_prob_max": old_log_prob.max().item(),
+                        "debug/old_log_prob_has_nan": float(torch.isnan(old_log_prob).any()),
+                        "debug/old_log_prob_has_inf": float(torch.isinf(old_log_prob).any()),
+                        "debug/advantages_min": advantages.min().item(),
+                        "debug/advantages_max": advantages.max().item(),
+                        "debug/advantages_mean": advantages.mean().item(),
+                        "debug/advantages_has_nan": float(torch.isnan(advantages).any()),
+                        "debug/advantages_has_inf": float(torch.isinf(advantages).any()),
+                        "debug/log_prob_diff_min": log_prob_diff.min().item(),
+                        "debug/log_prob_diff_max": log_prob_diff.max().item(),
+                        "debug/log_prob_diff_has_nan": float(torch.isnan(log_prob_diff).any()),
+                        "debug/log_prob_diff_has_inf": float(torch.isinf(log_prob_diff).any()),
+                        "debug/ratio_min": ratio.min().item(),
+                        "debug/ratio_max": ratio.max().item(),
+                        "debug/ratio_has_nan": float(torch.isnan(ratio).any()),
+                        "debug/ratio_has_inf": float(torch.isinf(ratio).any()),
+                    }
+
+                    if calculate_entropy:
+                        debug_metrics.update({
+                            "debug/entropy_min": entropy.min().item(),
+                            "debug/entropy_max": entropy.max().item(),
+                            "debug/entropy_mean": entropy.mean().item(),
+                            "debug/entropy_has_nan": float(torch.isnan(entropy).any()),
+                            "debug/entropy_has_inf": float(torch.isinf(entropy).any()),
+                        })
+
+                    append_to_dict(metrics, debug_metrics)
+
                     print(
                         "========================Entropy balanced policy loss============================"
                     )
-                    pg_loss, pg_clipfrac, ppo_kl, pg_clipfrac_lower = (
+                    pg_loss, pg_clipfrac, ppo_kl, pg_clipfrac_lower, loss_debug_metrics = (
                         compute_policy_loss_entropy_balanced_clipping(
                             old_log_prob=old_log_prob,
                             log_prob=log_prob,
@@ -558,12 +596,28 @@ class DataParallelPPOActor(BasePPOActor):
                         )
                     )
 
+                    append_to_dict(metrics, loss_debug_metrics)
+
+                    debug_metrics_loss = {
+                        "debug/pg_loss": pg_loss.item(),
+                        "debug/pg_loss_has_nan": float(torch.isnan(pg_loss).any()),
+                        "debug/pg_loss_has_inf": float(torch.isinf(pg_loss).any()),
+                    }
+                    append_to_dict(metrics, debug_metrics_loss)
+
                     if entropy_coeff != 0:
                         entropy_loss = agg_loss(
                             loss_mat=entropy,
                             loss_mask=response_mask,
                             loss_agg_mode=loss_agg_mode,
                         )
+
+                        debug_metrics_entropy = {
+                            "debug/entropy_loss": entropy_loss.item(),
+                            "debug/entropy_loss_has_nan": float(torch.isnan(entropy_loss).any()),
+                            "debug/entropy_loss_has_inf": float(torch.isinf(entropy_loss).any()),
+                        }
+                        append_to_dict(metrics, debug_metrics_entropy)
 
                         # compute policy loss
                         policy_loss = pg_loss - entropy_loss * entropy_coeff
@@ -588,6 +642,13 @@ class DataParallelPPOActor(BasePPOActor):
                         metrics["actor/kl_loss"] = kl_loss.detach().item()
                         metrics["actor/kl_coef"] = self.config.kl_loss_coef
 
+                    debug_metrics_policy = {
+                        "debug/policy_loss": policy_loss.item(),
+                        "debug/policy_loss_has_nan": float(torch.isnan(policy_loss).any()),
+                        "debug/policy_loss_has_inf": float(torch.isinf(policy_loss).any()),
+                    }
+                    append_to_dict(metrics, debug_metrics_policy)
+
                     if self.config.use_dynamic_bsz:
                         # relative to the dynamic bsz
                         loss = policy_loss * (
@@ -595,7 +656,30 @@ class DataParallelPPOActor(BasePPOActor):
                         )
                     else:
                         loss = policy_loss / self.gradient_accumulation
+
+                    debug_metrics_final = {
+                        "debug/final_loss": loss.item(),
+                        "debug/final_loss_has_nan": float(torch.isnan(loss).any()),
+                        "debug/final_loss_has_inf": float(torch.isinf(loss).any()),
+                    }
+                    append_to_dict(metrics, debug_metrics_final)
+
                     loss.backward()
+
+                    nan_grad_count = 0
+                    inf_grad_count = 0
+                    for name, param in self.actor_module.named_parameters():
+                        if param.grad is not None:
+                            if torch.isnan(param.grad).any():
+                                nan_grad_count += 1
+                            if torch.isinf(param.grad).any():
+                                inf_grad_count += 1
+
+                    debug_metrics_grad = {
+                        "debug/nan_grad_param_count": nan_grad_count,
+                        "debug/inf_grad_param_count": inf_grad_count,
+                    }
+                    append_to_dict(metrics, debug_metrics_grad)
 
                     data = {
                         "actor/pg_loss": pg_loss.detach().item(),
